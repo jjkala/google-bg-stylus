@@ -3,7 +3,7 @@
 @namespace      empty
 @author         jjkala
 @description    edit google pages background
-@version        20231127.17.45
+@version        20231127.19.33
 @license        NONE
 @advanced dropdown testbg "select background"{
   1 "fur" <<<EOT https://raw.githubusercontent.com/jjkala/test/main/photo_2022-11-09_09-34-37.jpg EOT;
@@ -12,8 +12,14 @@
   testbg-custom-dropdown "your bg" <<<EOT /*[[testbg-custom]]*\/ EOT;
 }
 @advanced text testbg-custom "paste link 4 ur bg" "https://example.com/image.png"
+@advanced text bgopc "bg opacity" "0.6"
+@advanced dropdown bgcolor "bg color"{
+  1 "lght" <<<EOT 255, 255, 255 EOT;
+  2 "dark" <<<EOT 0, 0, 0 EOT;
+  3 "test" <<<EOT gainsboro EOT;
+}
 ==/UserStyle== */
-@-moz-document url("https://www.google.com.mx/"), url-prefix("https://www.google."), url-prefix("https://images.google."), url-prefix("https://news.google."), url-prefix("https://books.google."), url-prefix("https://support.google."), url-prefix("https://play.google."), url-prefix("https://drive.google."), url-prefix("https://accounts.google."), url-prefix("https://myaccount.google."), url-prefix("https://plus.google."), url-prefix("https://docs.google.") {
+@-moz-document regexp("(.*)\\.google\\.(.*)") {
 html {
   background-image: url("/*[[testbg]]*/") !important;
   background-size: cover !important;
@@ -25,7 +31,7 @@ body {
 }
 
 body > div:not([style]):not(#searchform):not(#prm-pt):not(#viewport) {
-    background-color: rgba(255, 255, 255, 0.6) !important;
+    background-color: rgba(/*[[bgcolor]]*/, /*[[bgopc]]*/) !important;
   }
 
 #mngb, 
@@ -45,13 +51,13 @@ xform,
 .sfbg,
 #hdtb,
 #center_col {
-    background-color: rgba(255, 255, 255, 0) !important;
+    background-color: rgba(/*[[bgcolor]]*/, 0) !important;
   }
 
 #appbar, .appbar,
 #fbar, .fbar
   {
-    background-color: rgba(255, 255, 255, 0.6) !important;
+    background-color: rgba(/*[[bgcolor]]*/, 0) !important;
   }
 #gsr .sfbgx {
   background: none !important;
@@ -64,7 +70,7 @@ form#searchform {
 }
 
 .sfbgg {
-    background-color: rgba(255, 255, 255, 0.6) !important;
+    background-color: rgba(/*[[bgcolor]]*/, 0.6) !important;
   }
 
 .sfbg .sfbgg {
@@ -81,13 +87,13 @@ c-wiz,
 	background: none !important;
 }
 .UVZlkc {
-    background-color: rgba(255, 255, 255, 0.6) !important;
+    background-color: rgba(/*[[bgcolor]]*/, 0.6) !important;
   }
 
 
 #nav-menu-wrapper,
 .story {
-    background-color: rgba(255, 255, 255, 0.6) !important;
+    background-color: rgba(/*[[bgcolor]]*/, 0.6) !important;
   }
 #footcnt {
     visibility: hidden !important;
@@ -112,6 +118,24 @@ c-wiz,
     padding: 0 8px;
     text-align: center;
 }
+.c93Gbe {
+    background: #fff0;
+}
+.yg51vc {
+    background: #fff0;
+    height: 58px;
+    padding: 0;
+    position: relative;
+    z-index: 126;
+    white-space: nowrap;
+}
+.I6TXqe {
+    background: #90bad273;
+}
+.f6F9Be {
+    background: #30466d4a;
+}
+
 }
 
 @-moz-document domain("example.com") {
